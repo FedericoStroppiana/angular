@@ -1,1 +1,10 @@
-<p>print-drinks works!</p>
+<app-search></app-search>
+<div class="d-flex flex-wrap justify-content-around">
+  <div *ngFor="let drink of api.drinksList " class="card m-2" style="width: 18rem">
+    <img [src]="drink.image" class="card-img-top" alt="drink image" />
+    <div class="card-body">
+      <h5 class="card-title">{{drink.name}}</h5>
+      <a (click)="handleOnInfo(drink.id)" class="btn btn-primary">Info</a>
+    </div>
+  </div>
+</div>

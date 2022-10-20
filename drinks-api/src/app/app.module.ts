@@ -6,18 +6,20 @@ import { AppComponent } from './app.component';
 import { SearchComponent } from './pages/search/search.component';
 import { PrintDrinksComponent } from './pages/print-drinks/print-drinks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    PrintDrinksComponent,
-    FormsModule,\
-    ReactiveFormsModule
+    PrintDrinksComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

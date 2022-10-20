@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from '../../api';
 
 @Component({
@@ -9,12 +9,13 @@ import { APIService } from '../../api';
 })
 export class PrintDrinksComponent implements OnInit {
 
-  constructor(public api: APIService, private router: Router) {}
+  constructor(public api: APIService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.api.searchDrinks(this.route.snapshot.params['searchedDrinkName']);
   }
 
   handleOnInfo(id: string) {
-    this.router.navigateByUrl(`/drink/${id}`);
+    this.router.navigateByUrl(`${this.router.url}/${id}`);
   }
 }

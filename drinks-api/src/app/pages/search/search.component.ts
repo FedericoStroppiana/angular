@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { APIService } from '../../api';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search',
@@ -8,16 +8,15 @@ import { APIService } from '../../api';
   styleUrls: ['./search.component.css'],
 })
 export class SearchComponent implements OnInit {
-  constructor(private api: APIService) {}
+  constructor(private router: Router) {}
 
   formGroup = new FormGroup({
-    drinkName: new FormControl(''),
+    searchedDrinkName: new FormControl(''),
   });
 
   ngOnInit(): void {}
 
-  handleOnSubmit(e: Event) {
-    e.preventDefault();
-    this.api.searchDrinks(this.formGroup.get('drinkName')!.value!);
+  handleOnSearch() {
+    this.router.navigateByUrl(`/search/${this.formGroup.get('searchedDrinkName')!.value!}`);
   }
 }

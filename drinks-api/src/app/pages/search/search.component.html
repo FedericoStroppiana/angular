@@ -1,11 +1,12 @@
-<nav class="navbar">
-  <div class="container-fluid">
-    <form class="d-flex" role="search" (submit)="handleOnSubmit($event)" [formGroup]="this.formGroup">
+<nav class="navbar my-3">
+  <div class="container-fluid justify-content-center">
+    <form class="d-flex" role="search" (submit)="handleOnSearch()" [formGroup]="this.formGroup">
       <input
         class="form-control me-2"
         type="search"
         placeholder="Search"
         aria-label="Search"
+        formControlName="searchedDrinkName"
       />
       <button class="btn btn-outline-success" type="submit">Search</button>
     </form>
