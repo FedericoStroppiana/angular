@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { APIService } from '../../api';
 
 @Component({
@@ -8,11 +8,7 @@ import { APIService } from '../../api';
   styleUrls: ['./drink-detail.component.css'],
 })
 export class DrinkDetailComponent implements OnInit {
-  constructor(
-    public api: APIService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {}
+  constructor(public api: APIService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.api.searchDrinkById(this.route.snapshot.params['idDrink']);
