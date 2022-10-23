@@ -63,6 +63,7 @@ export class APIService {
     this.http
       .get(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
       .subscribe((response) => {
+        console.log(response);        
         this.drinkDetailApi = response as CocktailDetailApi;
         this.drinkDetail = {
           id: this.drinkDetailApi.drinks[0].idDrink,

@@ -1,1 +1,37 @@
-<h1>Hello</h1>
+<!-- <div class="d-flex m-3 gap-3">
+    <div>
+        <img [src]="api.drinkDetail?.image" alt="drink image" class="img-fluid">
+    </div>
+    <div>
+        <h1>{{api.drinkDetail?.name}}</h1>
+        <h6>{{api.drinkDetail?.id}}</h6>
+        <p>{{api.drinkDetail?.category}}</p>
+        <p>{{api.drinkDetail?.alcoholic}}</p>
+        <p>{{api.drinkDetail?.instructions}}</p>
+    </div>
+</div> -->
+<div class="card m-3" style="border: 0">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        [src]="api.drinkDetail?.image"
+        class="img-fluid rounded"
+        alt="drink image"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">{{api.drinkDetail?.name}}</h2>
+        <p class="card-text">
+          <small class="text-muted">{{api.drinkDetail?.id}}</small>
+        </p>
+        <p class="card-text">
+            {{api.drinkDetail?.category}} - {{api.drinkDetail?.alcoholic}}
+        </p>
+        <p class="card-text">
+            {{api.drinkDetail?.instructions}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
