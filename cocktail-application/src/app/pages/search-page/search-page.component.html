@@ -8,7 +8,10 @@
     </button>
   </div>
 </nav>
-<form class="row gy-2 gx-3 align-items-center justify-content-center mt-4">
+<form
+  class="row gy-2 gx-3 align-items-center justify-content-center mt-4"
+  (submit)="onSubmit($event)"
+>
   <div class="col-auto">
     <input
       type="text"
@@ -34,6 +37,22 @@
     </datalist>
   </div>
   <div class="col-auto">
-    <button class="btn btn-primary">Search</button>
+    <button type="submit" class="btn btn-primary">Search</button>
   </div>
 </form>
+<div class="d-flex flex-wrap justify-content-around mt-4">
+  <div
+    *ngFor="let drink of api.cocktailList"
+    class="card m-2"
+    style="width: 18rem"
+  >
+    <img [src]="drink.image" class="card-img-top" alt="drink image" />
+    <div class="card-body">
+      <h5 class="card-title">{{ drink.name }}</h5>
+      <h6 class="text-muted fst-italic">{{ drink.category || drink.id }}</h6>
+      <div class="text-end">
+        <a class="btn btn-primary">Info</a>
+      </div>
+    </div>
+  </div>
+</div>

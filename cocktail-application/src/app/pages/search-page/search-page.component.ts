@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
+import { APIService } from "src/app/api";
 
 @Component({
   selector: "app-search-page",
@@ -7,7 +8,7 @@ import { FormControl, FormGroup } from "@angular/forms";
   styleUrls: ["./search-page.component.css"],
 })
 export class SearchPageComponent implements OnInit {
-  constructor() {}
+  constructor(public api: APIService) {}
 
   ngOnInit(): void {}
 
@@ -115,6 +116,7 @@ export class SearchPageComponent implements OnInit {
 
   disableNameInput: boolean = false;
   disableIngredientInput: boolean = false;
+  disableDrinksView: boolean = true;
 
   nameOnChange(e: any) {
     if (e.target.value) {
@@ -122,7 +124,6 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.disableIngredientInput = false;
     }
-    console.log("ciiao");
   }
 
   ingredientOnChange(e: any) {
@@ -131,6 +132,18 @@ export class SearchPageComponent implements OnInit {
     } else {
       this.disableNameInput = false;
     }
-    console.log("ciiao");
+  }
+
+  onSubmit(e: any) {
+    const searchedName = e.target[0].value;
+    const searchedIngredient = e.target[1].value;
+
+    if (searchedName) {
+      this.api.searchByName(searchedName);
+    } else {
+      this.api.searchByIngredient(searchedIngredient);
+    }
+
+    this.disableDrinksView = false;
   }
 }
