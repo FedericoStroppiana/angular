@@ -1,0 +1,39 @@
+<nav class="navbar bg-light p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><i class="bi bi-cup-straw"></i> Cocktail Application</a
+    >
+    <button class="btn btn-success" routerLink="/home">
+      Home <i class="bi bi-house-fill"></i>
+    </button>
+  </div>
+</nav>
+<form class="row gy-2 gx-3 align-items-center justify-content-center mt-4">
+  <div class="col-auto">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Drink Name"
+      (input)="nameOnChange($event)"
+      [disabled]="disableNameInput"
+    />
+  </div>
+  <div class="col-auto">
+    <input
+      class="form-control"
+      list="drinkIngredient"
+      placeholder="Drink Ingredient"
+      (input)="ingredientOnChange($event)"
+      [disabled]="disableIngredientInput"
+    />
+    <datalist id="drinkIngredient">
+      <option
+        *ngFor="let ingredient of ingredientList"
+        [value]="ingredient"
+      ></option>
+    </datalist>
+  </div>
+  <div class="col-auto">
+    <button class="btn btn-primary">Search</button>
+  </div>
+</form>

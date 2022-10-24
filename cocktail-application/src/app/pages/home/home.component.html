@@ -1,0 +1,35 @@
+<nav class="navbar bg-light p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><i class="bi bi-cup-straw"></i> Cocktail Application</a
+    >
+    <button class="btn btn-success" routerLink="/search">Search <i class="bi bi-search"></i></button>
+  </div>
+</nav>
+<ul class="nav nav-tabs nav-fill">
+  <li
+    class="nav-item"
+    *ngFor="let label of tabLabels"
+    (click)="onSearch(label)"
+  >
+    <a class="nav-link" [ngClass]="{ active: activeTab === label }">{{
+      label
+    }}</a>
+  </li>
+</ul>
+<div class="d-flex flex-wrap justify-content-around mt-4">
+  <div
+    *ngFor="let drink of api.drinksList"
+    class="card m-2"
+    style="width: 18rem"
+  >
+    <img [src]="drink.image" class="card-img-top" alt="drink image" />
+    <div class="card-body">
+      <h2 class="card-title">{{ drink.name }}</h2>
+      <h4 class="text-muted fst-italic">{{ drink.category }}</h4>
+      <div class="text-end">
+        <a class="btn btn-primary">Info</a>
+      </div>
+    </div>
+  </div>
+</div>
