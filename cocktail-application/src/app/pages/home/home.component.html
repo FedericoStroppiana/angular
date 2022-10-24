@@ -6,7 +6,7 @@
     <button class="btn btn-success" routerLink="/search">Search <i class="bi bi-search"></i></button>
   </div>
 </nav>
-<ul class="nav nav-tabs nav-fill">
+<ul class="nav nav-tabs justify-content-center">
   <li
     class="nav-item"
     *ngFor="let label of tabLabels"
@@ -25,8 +25,8 @@
   >
     <img [src]="drink.image" class="card-img-top" alt="drink image" />
     <div class="card-body">
-      <h2 class="card-title">{{ drink.name }}</h2>
-      <h4 class="text-muted fst-italic">{{ drink.category }}</h4>
+      <h5 class="card-title">{{ drink.name }}</h5>
+      <h6 class="text-muted fst-italic">{{ drink.category }}</h6>
       <div class="text-end">
         <a class="btn btn-primary">Info</a>
       </div>
