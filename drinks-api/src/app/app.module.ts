@@ -7,12 +7,14 @@ import { SearchComponent } from './pages/search/search.component';
 import { PrintDrinksComponent } from './pages/print-drinks/print-drinks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { DrinkDetailComponent } from './pages/drink-detail/drink-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SearchComponent,
-    PrintDrinksComponent
+    PrintDrinksComponent,
+    DrinkDetailComponent
   ],
   imports: [
     BrowserModule,

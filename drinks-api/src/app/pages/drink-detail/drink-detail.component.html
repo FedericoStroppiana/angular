@@ -24,7 +24,9 @@
         </p>
         <p>
           <span class="badge bg-primary">Ingredients</span>
-          <li></li>
+          <li *ngFor="let ingredient of api.drinkDetail?.ingredients">
+            {{ ingredient }}
+          </li>
         </p>
       </div>
     </div>
