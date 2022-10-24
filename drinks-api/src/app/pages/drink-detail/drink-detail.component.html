@@ -23,9 +23,15 @@
           {{ api.drinkDetail?.instructions }}
         </p>
         <p>
-          <span class="badge bg-primary">Ingredients</span>
+          <span class="fw-bold fst-italic">Ingredients:</span>
           <li *ngFor="let ingredient of api.drinkDetail?.ingredients">
             {{ ingredient }}
+          </li>
+        </p>
+        <p>
+          <span class="fw-bold fst-italic">Measures:</span>
+          <li *ngFor="let measure of api.drinkDetail?.measures">
+            {{ measure }}
           </li>
         </p>
       </div>

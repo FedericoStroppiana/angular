@@ -2,11 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 type CocktailListApi = {
-  drinks: [{ idDrink: string; strDrink: string; strDrinkThumb: string }];
+  drinks: [{ idDrink: string; strDrink: string; strCategory: string; strDrinkThumb: string;}];
 };
 type CocktailList = {
   id: string;
   name: string;
+  category: string;
   image: string;
 };
 
@@ -86,6 +87,7 @@ export class APIService {
         this.drinksList = this.drinksListApi.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
+          category: drink.strCategory,
           image: drink.strDrinkThumb,
         }));
       });
