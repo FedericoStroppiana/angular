@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/drinks-api",
+            "outputPath": "dist/cocktail-application",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,10 +62,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "drinks-api:build:production"
+              "browserTarget": "cocktail-application:build:production"
             },
             "development": {
-              "browserTarget": "drinks-api:build:development"
+              "browserTarget": "cocktail-application:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -73,7 +73,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "drinks-api:build"
+            "browserTarget": "cocktail-application:build"
           }
         },
         "test": {

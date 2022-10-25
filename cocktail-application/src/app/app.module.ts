@@ -9,9 +9,10 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatTabsModule } from "@angular/material/tabs";
 import { HomeComponent } from './pages/home/home.component';
 import { SearchPageComponent } from './pages/search-page/search-page.component';
+import { CocktailDetailComponent } from './pages/cocktail-detail/cocktail-detail.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, SearchPageComponent],
+  declarations: [AppComponent, HomeComponent, SearchPageComponent, CocktailDetailComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
