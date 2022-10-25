@@ -6,7 +6,7 @@ type CocktailListApi = {
     {
       idDrink: string;
       strDrink: string;
-      strCategory: string;
+      strCategory?: string;
       strDrinkThumb: string;
     }
   ];
@@ -15,7 +15,7 @@ type CocktailListApi = {
 type CocktailList = {
   id: string;
   name: string;
-  category: string;
+  category?: string;
   image: string;
 };
 
@@ -25,16 +25,19 @@ type CocktailList = {
 export class APIService {
   constructor(private http: HttpClient) {}
 
-  cocktailListApi: CocktailListApi | undefined;
-  cocktailList: CocktailList[] | undefined;
+  cocktailListApiHome: CocktailListApi | undefined;
+  cocktailListHome: CocktailList[] | undefined;
+  
+  cocktailListApiSearch: CocktailListApi | undefined;
+  cocktailListSearch: CocktailList[] | undefined;
 
   searchByLetter(letter: string) {
     this.http
       .get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
       .subscribe((response) => {
-        this.cocktailListApi = response as CocktailListApi;
+        this.cocktailListApiHome = response as CocktailListApi;
 
-        this.cocktailList = this.cocktailListApi.drinks.map((drink) => ({
+        this.cocktailListHome = this.cocktailListApiHome.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
           category: drink.strCategory,
@@ -49,9 +52,9 @@ export class APIService {
       .subscribe((response) => {
         console.log(response);
         
-        this.cocktailListApi = response as CocktailListApi;
+        this.cocktailListApiSearch = response as CocktailListApi;
 
-        this.cocktailList = this.cocktailListApi.drinks.map((drink) => ({
+        this.cocktailListSearch = this.cocktailListApiSearch.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
           category: drink.strCategory,
@@ -66,9 +69,9 @@ export class APIService {
       .subscribe((response) => {
         console.log(response);
         
-        this.cocktailListApi = response as CocktailListApi;
+        this.cocktailListApiSearch = response as CocktailListApi;
 
-        this.cocktailList = this.cocktailListApi.drinks.map((drink) => ({
+        this.cocktailListSearch = this.cocktailListApiSearch.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
           category: drink.strCategory,
