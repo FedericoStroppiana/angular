@@ -1,3 +1,0 @@
-npm ci
-
-npm start
