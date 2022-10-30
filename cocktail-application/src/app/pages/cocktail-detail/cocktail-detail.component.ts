@@ -13,6 +13,8 @@ export class CocktailDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.searchDrinkById(this.route.snapshot.params['idDrink']);
+    console.log(this.route.snapshot.params['idDrink']);
+    
   }
 
 }

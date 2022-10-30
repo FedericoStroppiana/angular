@@ -51,7 +51,7 @@
       <h5 class="card-title">{{ drink.name }}</h5>
       <h6 class="text-muted fst-italic">{{ drink.category || drink.id }}</h6>
       <div class="text-end">
-        <a class="btn btn-primary">Info</a>
+        <a class="btn btn-primary" [routerLink]="'/detail/'+ drink.id">Info</a>
       </div>
     </div>
   </div>

@@ -21,7 +21,6 @@ export class HomeComponent implements OnInit {
     "5",
     "6",
     "7",
-    "8",
     "9",
     "A",
     "B",
@@ -43,10 +42,8 @@ export class HomeComponent implements OnInit {
     "R",
     "S",
     "T",
-    "U",
     "V",
     "W",
-    "X",
     "Y",
     "Z",
   ];
