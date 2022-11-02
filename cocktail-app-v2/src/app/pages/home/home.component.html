@@ -1,0 +1,81 @@
+<nav class="navbar navbar-dark bg-primary p-4">
+  <div class="container-fluid">
+    <a class="navbar-brand"
+      ><i class="bi bi-cup-straw"></i> Cocktail Application</a
+    >
+    <button class="btn btn-outline-light" routerLink="/search">
+      Search <i class="bi bi-search"></i>
+    </button>
+  </div>
+</nav>
+<h1 class="p-3 mt-3">Random Cocktail</h1>
+<div class="card m-3" style="border: 0">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img
+        [src]="api.randomCocktail?.image"
+        class="img-fluid rounded"
+        alt="drink image"
+      />
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h2 class="card-title">{{ api.randomCocktail?.name }}</h2>
+        <p class="card-text">
+          <small class="text-muted fst-italic">{{
+            api.randomCocktail?.id
+          }}</small>
+        </p>
+        <p class="card-text">
+          <span class="badge text-bg-primary fst-italic">{{
+            api.randomCocktail?.alcoholic
+          }}</span>
+          - {{ api.randomCocktail?.category }}
+        </p>
+        <p class="card-text">
+          {{ api.randomCocktail?.instructions }}
+        </p>
+        <p>
+          <span class="fw-bold fst-italic">Ingredients:</span>
+          <li *ngFor="let ingredient of api.randomCocktail?.ingredients">
+            {{ ingredient }}
+          </li>
+        </p>
+        <p>
+          <span class="fw-bold fst-italic">Measures:</span>
+          <li *ngFor="let measure of api.randomCocktail?.measures">
+            {{ measure }}
+          </li>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+<h1 class="p-3 mt-5">Cocktail List</h1>
+<ul class="nav nav-tabs justify-content-center">
+  <li
+    class="nav-item"
+    *ngFor="let label of tabLabels"
+    (click)="onSearch(label)"
+  >
+    <a class="nav-link" [ngClass]="{ active: activeTab === label }">{{
+      label
+    }}</a>
+  </li>
+</ul>
+<div class="d-flex flex-wrap justify-content-around mt-4">
+  <div
+    *ngFor="let drink of api.cocktailListHome"
+    class="card m-2"
+    style="width: 18rem"
+  >
+    <img [src]="drink.image" class="card-img-top" alt="drink image" />
+    <div class="card-body">
+      <h5 class="card-title">{{ drink.name }}</h5>
+      <h6 class="text-muted fst-italic">{{ drink.category }}</h6>
+      <div class="text-end">
+        <a class="btn btn-primary" [routerLink]="'/detail/' + drink.id">Info</a>
+      </div>
+    </div>
+  </div>
+</div>
