@@ -27,6 +27,10 @@ type CocktailDetailApi = {
       strCategory: string;
       strAlcoholic: string;
       strInstructions: string;
+      strInstructionsDE: string;
+      strInstructionsES: string;
+      strInstructionsFR: string;
+      strInstructionsIT: string;  
       strDrinkThumb: string;
       strIngredient1: string;
       strIngredient2: string;
@@ -68,7 +72,7 @@ type CocktailDetail = {
   name: string;
   category: string;
   alcoholic: string;
-  instructions: string;
+  instructions?: {[key: string]: string};
   image: string;
   ingredients: string[];
   measures: string[];
@@ -164,12 +168,27 @@ export class APIService {
           }
         }
 
+        const instructions: {[key: string]: string} = {};
+        const languages = ['', 'DE', 'ES', 'FR', 'IT'];
+        for (const language of languages) {
+          const instruction =
+            this.cocktailDetailApi.drinks[0][
+              `strInstructions${language}` as keyof CocktailDetailApi['drinks'][0]
+            ];
+          if (instruction) {
+            instructions[language] = instruction;
+          }
+        }
+
+        console.log(instructions['DE']);
+        
+
         this.cocktailDetail = {
           id: this.cocktailDetailApi.drinks[0].idDrink,
           name: this.cocktailDetailApi.drinks[0].strDrink,
           category: this.cocktailDetailApi.drinks[0].strCategory,
           alcoholic: this.cocktailDetailApi.drinks[0].strAlcoholic,
-          instructions: this.cocktailDetailApi.drinks[0].strInstructions,
+          instructions: instructions,
           image: this.cocktailDetailApi.drinks[0].strDrinkThumb,
           ingredients: ingredients,
           measures: measures,
@@ -205,12 +224,24 @@ export class APIService {
           }
         }
 
+        const instructions: {[key: string]: string} = {};
+        const languages = ['', 'DE', 'ES', 'FR', 'IT'];
+        for (const language of languages) {
+          const instruction =
+            this.randomCocktailApi.drinks[0][
+              `strInstructions${language}` as keyof CocktailDetailApi['drinks'][0]
+            ];
+          if (instruction) {
+            instructions[language] = instruction;
+          }
+        }        
+
         this.randomCocktail = {
           id: this.randomCocktailApi.drinks[0].idDrink,
           name: this.randomCocktailApi.drinks[0].strDrink,
           category: this.randomCocktailApi.drinks[0].strCategory,
           alcoholic: this.randomCocktailApi.drinks[0].strAlcoholic,
-          instructions: this.randomCocktailApi.drinks[0].strInstructions,
+          instructions: instructions,
           image: this.randomCocktailApi.drinks[0].strDrinkThumb,
           ingredients: ingredients,
           measures: measures,

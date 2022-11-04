@@ -9,14 +9,15 @@ import { APIService } from 'src/app/api';
 })
 export class DetailComponent implements OnInit {
   constructor(public api: APIService, private route: ActivatedRoute) {}
-
+  
   ngOnInit(): void {
     // this.api.searchById(this.route.snapshot.params['idDrink']);
-    this.api.searchById('11000');
+    this.api.searchById('11020');
   }
-
+  
   disableCocktailView: boolean = true;
   searchedIngredient: string = '';
+  selectLanguage: string = '';
 
   ingredientOnClick(e: any) {
     this.api.searchByIngredient(e.target.innerText);
@@ -28,4 +29,5 @@ export class DetailComponent implements OnInit {
     this.api.searchById(idDrink);    
     this.disableCocktailView = true;
   }
+
 }
