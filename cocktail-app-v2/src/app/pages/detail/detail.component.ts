@@ -11,8 +11,7 @@ export class DetailComponent implements OnInit {
   constructor(public api: APIService, private route: ActivatedRoute) {}
   
   ngOnInit(): void {
-    // this.api.searchById(this.route.snapshot.params['idDrink']);
-    this.api.searchById('11020');
+    this.api.searchById(this.route.snapshot.params['idDrink']);
   }
   
   disableCocktailView: boolean = true;

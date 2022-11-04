@@ -23,24 +23,26 @@
         </p>
         <p>
           <select class="form-select" [(ngModel)]="selectLanguage">
-            <option value="" selected >English</option>
+            <option value="" selected>English</option>
             <option value="DE">German</option>
             <option value="ES">Spanish</option>
             <option value="FR">French</option>
-            <option value="IT">Italian </option>
+            <option value="IT">Italian</option>
           </select>
         </p>
         <p class="card-text">
-          {{ api.cocktailDetail?.instructions![selectLanguage] || "No instructions found in this language" }}
+          {{
+            (api.cocktailDetail?.instructions)![selectLanguage] ||
+              "No instructions found in this language"
+          }}
         </p>
         <p>
           <span class="fw-bold fst-italic">Ingredients:</span>
           <li
             *ngFor="let ingredient of api.cocktailDetail?.ingredients"
-            (click)="ingredientOnClick($event)"
             class="clickableIngredient"
           >
-            <span>{{ ingredient }}</span>
+            <span (click)="ingredientOnClick($event)">{{ ingredient }}</span>
           </li>
         </p>
         <p>
@@ -54,20 +56,20 @@
   </div>
 </div>
 <div *ngIf="disableCocktailView === false">
-  <h1>Cocktails with {{ searchedIngredient }}</h1>
+  <h1 id="cocktailView">Cocktails with {{ searchedIngredient }}</h1>
   <div class="text-muted">{{ api.cocktailList?.length }} results found</div>
   <div class="d-flex flex-wrap justify-content-around">
     <div
-      *ngFor="let drink of api.cocktailList"
+      *ngFor="let cocktail of api.cocktailList"
       class="card m-2"
       style="width: 18rem"
     >
-      <img [src]="drink.image" class="card-img-top" alt="drink image" />
+      <img [src]="cocktail.image" class="card-img-top" alt="cocktail image" />
       <div class="card-body">
-        <h5 class="card-title">{{ drink.name }}</h5>
-        <h6 class="text-muted fst-italic">{{ drink.id }}</h6>
+        <h5 class="card-title">{{ cocktail.name }}</h5>
+        <h6 class="text-muted fst-italic">{{ cocktail.id }}</h6>
         <div class="text-end">
-          <a class="btn btn-primary" (click)="infoOnClick(drink.id)">Info</a>
+          <a class="btn btn-primary" (click)="infoOnClick(cocktail.id)">Info</a>
         </div>
       </div>
     </div>
