@@ -5,11 +5,14 @@ import { HomeComponent } from './pages/home/home.component';
 import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
-  { path: "search", component: SearchComponent },
-  { path: "home", component: HomeComponent },
-  { path: "detail/:idDrink", component: DetailComponent },
-  { path: "", redirectTo: "home", pathMatch: "full" },
-  { path: "**", redirectTo: "home" },
+  // { path: "search", component: SearchComponent },
+  // { path: "home", component: HomeComponent },
+  // { path: "detail/:idDrink", component: DetailComponent },
+  // { path: "", redirectTo: "home", pathMatch: "full" },
+  // { path: "**", redirectTo: "home" },
+  { path: "detail", component: DetailComponent },
+  { path: "", redirectTo: "detail", pathMatch: "full" },
+  { path: "**", redirectTo: "detail" },
 ];
 
 @NgModule({

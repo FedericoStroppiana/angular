@@ -117,7 +117,7 @@ export class SearchComponent implements OnInit {
 
   disableNameInput: boolean = false;
   disableIngredientInput: boolean = false;
-  disableDrinksView: boolean = true;
+  disableCocktailView: boolean = true;
 
   nameOnChange(e: any) {
     if (e.target.value) {
@@ -145,6 +145,6 @@ export class SearchComponent implements OnInit {
       this.api.searchByIngredient(searchedIngredient);
     }
 
-    this.disableDrinksView = false;
+    this.disableCocktailView = false;
   }
 }

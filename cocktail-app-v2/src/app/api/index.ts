@@ -1,5 +1,5 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 type CocktailListApi = {
   drinks: [
@@ -10,6 +10,13 @@ type CocktailListApi = {
       strDrinkThumb: string;
     }
   ];
+};
+
+type CocktailList = {
+  id: string;
+  name: string;
+  category?: string;
+  image: string;
 };
 
 type CocktailDetailApi = {
@@ -56,13 +63,6 @@ type CocktailDetailApi = {
   ];
 };
 
-type CocktailList = {
-  id: string;
-  name: string;
-  category?: string;
-  image: string;
-};
-
 type CocktailDetail = {
   id: string;
   name: string;
@@ -75,20 +75,17 @@ type CocktailDetail = {
 };
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class APIService {
   constructor(private http: HttpClient) {}
 
-  cocktailListApiHome: CocktailListApi | undefined;
-  cocktailListHome: CocktailList[] | undefined;
-  
-  cocktailListApiSearch: CocktailListApi | undefined;
-  cocktailListSearch: CocktailList[] | undefined;
+  cocktailListApi: CocktailListApi | undefined;
+  cocktailList: CocktailList[] | undefined;
 
   cocktailDetailApi: CocktailDetailApi | undefined;
   cocktailDetail: CocktailDetail | undefined;
-  
+
   randomCocktailApi: CocktailDetailApi | undefined;
   randomCocktail: CocktailDetail | undefined;
 
@@ -96,9 +93,9 @@ export class APIService {
     this.http
       .get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?f=${letter}`)
       .subscribe((response) => {
-        this.cocktailListApiHome = response as CocktailListApi;
+        this.cocktailListApi = response as CocktailListApi;
 
-        this.cocktailListHome = this.cocktailListApiHome.drinks.map((drink) => ({
+        this.cocktailList = this.cocktailListApi.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
           category: drink.strCategory,
@@ -111,11 +108,9 @@ export class APIService {
     this.http
       .get(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${name}`)
       .subscribe((response) => {
-        console.log(response);
-        
-        this.cocktailListApiSearch = response as CocktailListApi;
+        this.cocktailListApi = response as CocktailListApi;
 
-        this.cocktailListSearch = this.cocktailListApiSearch.drinks.map((drink) => ({
+        this.cocktailList = this.cocktailListApi.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
           category: drink.strCategory,
@@ -126,13 +121,13 @@ export class APIService {
 
   searchByIngredient(ingredient: string) {
     this.http
-      .get(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`)
+      .get(
+        `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${ingredient}`
+      )
       .subscribe((response) => {
-        console.log(response);
-        
-        this.cocktailListApiSearch = response as CocktailListApi;
+        this.cocktailListApi = response as CocktailListApi;
 
-        this.cocktailListSearch = this.cocktailListApiSearch.drinks.map((drink) => ({
+        this.cocktailList = this.cocktailListApi.drinks.map((drink) => ({
           id: drink.idDrink,
           name: drink.strDrink,
           category: drink.strCategory,
@@ -183,41 +178,43 @@ export class APIService {
   }
 
   searchRandom() {
-    this.http.get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`).subscribe((response) => {
-      this.randomCocktailApi = response as CocktailDetailApi;
+    this.http
+      .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
+      .subscribe((response) => {
+        this.randomCocktailApi = response as CocktailDetailApi;
 
-      const ingredients: string[] = [];
-      for (let i = 1; i <= 15; i++) {
-        const ingredient =
-          this.randomCocktailApi.drinks[0][
-            `strIngredient${i}` as keyof CocktailDetailApi['drinks'][0]
-          ];
-        if (ingredient) {
-          ingredients.push(ingredient);
+        const ingredients: string[] = [];
+        for (let i = 1; i <= 15; i++) {
+          const ingredient =
+            this.randomCocktailApi.drinks[0][
+              `strIngredient${i}` as keyof CocktailDetailApi['drinks'][0]
+            ];
+          if (ingredient) {
+            ingredients.push(ingredient);
+          }
         }
-      }
 
-      const measures: string[] = [];
-      for (let i = 1; i <= 15; i++) {
-        const measure =
-          this.randomCocktailApi.drinks[0][
-            `strMeasure${i}` as keyof CocktailDetailApi['drinks'][0]
-          ];
-        if (measure) {
-          measures.push(measure);
+        const measures: string[] = [];
+        for (let i = 1; i <= 15; i++) {
+          const measure =
+            this.randomCocktailApi.drinks[0][
+              `strMeasure${i}` as keyof CocktailDetailApi['drinks'][0]
+            ];
+          if (measure) {
+            measures.push(measure);
+          }
         }
-      }
 
-      this.randomCocktail = {
-        id: this.randomCocktailApi.drinks[0].idDrink,
-        name: this.randomCocktailApi.drinks[0].strDrink,
-        category: this.randomCocktailApi.drinks[0].strCategory,
-        alcoholic: this.randomCocktailApi.drinks[0].strAlcoholic,
-        instructions: this.randomCocktailApi.drinks[0].strInstructions,
-        image: this.randomCocktailApi.drinks[0].strDrinkThumb,
-        ingredients: ingredients,
-        measures: measures,
-      };
-    } );
+        this.randomCocktail = {
+          id: this.randomCocktailApi.drinks[0].idDrink,
+          name: this.randomCocktailApi.drinks[0].strDrink,
+          category: this.randomCocktailApi.drinks[0].strCategory,
+          alcoholic: this.randomCocktailApi.drinks[0].strAlcoholic,
+          instructions: this.randomCocktailApi.drinks[0].strInstructions,
+          image: this.randomCocktailApi.drinks[0].strDrinkThumb,
+          ingredients: ingredients,
+          measures: measures,
+        };
+      });
   }
 }
