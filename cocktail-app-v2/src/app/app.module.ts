@@ -8,13 +8,15 @@ import { SearchComponent } from './pages/search/search.component';
 import { DetailComponent } from './pages/detail/detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
+import { OrderComponent } from './pages/order/order.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SearchComponent,
-    DetailComponent
+    DetailComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

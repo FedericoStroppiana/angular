@@ -1,0 +1,36 @@
+<form
+  class="row gy-2 gx-3 align-items-center justify-content-center mt-4"
+  (submit)="onSubmit($event)"
+>
+  <div class="col-auto">
+    <input type="text" class="form-control" placeholder="Drink Name" />
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </div>
+</form>
+<div
+  *ngIf="disableCocktailView === false"
+  class="d-flex flex-wrap justify-content-center mt-4"
+>
+  <ul class="list-group">
+    <li class="list-group-item" *ngFor="let cocktail of api.cocktailList">
+      <div class="card detailCard m-2" style="width: 18rem">
+        <input class="form-check-input" type="checkbox" [id]="cocktail.name" />
+        <label [for]="cocktail.name"
+          ><img
+            [src]="cocktail.image"
+            class="card-img-top"
+            alt="cocktail image"
+        /></label>
+
+        <div class="card-body">
+          <h5 class="card-title">{{ cocktail.name }}</h5>
+          <h6 class="text-muted fst-italic">
+            {{ cocktail.category || cocktail.id }}
+          </h6>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
