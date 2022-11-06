@@ -6,16 +6,13 @@ import { OrderComponent } from './pages/order/order.component';
 import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
-  // { path: "search", component: SearchComponent },
-  // { path: "home", component: HomeComponent },
-  // { path: "detail/:idDrink", component: DetailComponent },
-  // { path: "order", component: OrderComponent }, 
-  // { path: "", redirectTo: "home", pathMatch: "full" },
-  // { path: "**", redirectTo: "home" },
+  { path: "home", component: HomeComponent },
+  { path: "search", component: SearchComponent },
+  { path: "detail/:idDrink", component: DetailComponent },
   { path: "order", component: OrderComponent }, 
-  { path: "", redirectTo: "order", pathMatch: "full" },
-  { path: "**", redirectTo: "order" },
-];
+  { path: "", redirectTo: "search", pathMatch: "full" },
+  { path: "**", redirectTo: "search" },
+]; 
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

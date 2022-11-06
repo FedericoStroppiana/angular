@@ -16,7 +16,7 @@ import { OrderComponent } from './pages/order/order.component';
     HomeComponent,
     SearchComponent,
     DetailComponent,
-    OrderComponent
+    OrderComponent,
   ],
   imports: [
     BrowserModule,

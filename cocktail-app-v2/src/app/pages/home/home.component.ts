@@ -50,8 +50,9 @@ export class HomeComponent implements OnInit {
     "Z",
   ];
   activeTab = "1";
+  selectLanguage: string = '';
 
-  onSearch(letter: string) {
+  onChangeTab(letter: string) {
     this.api.searchByLetter(letter);
     this.activeTab = letter;
   }
