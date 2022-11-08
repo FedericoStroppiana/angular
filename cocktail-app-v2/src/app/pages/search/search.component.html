@@ -20,38 +20,41 @@
     </a>
   </li>
 </ul>
-<form
-  class="row gy-2 gx-3 align-items-center justify-content-center mt-4"
-  (submit)="onSubmit($event)"
->
-  <div class="col-auto">
-    <input
-      type="text"
-      class="form-control"
-      placeholder="Drink Name"
-      (input)="nameOnChange($event)"
-      [disabled]="disableNameInput"
-    />
-  </div>
-  <div class="col-auto">
-    <input
-      class="form-control"
-      list="drinkIngredient"
-      placeholder="Drink Ingredient"
-      (input)="ingredientOnChange($event)"
-      [disabled]="disableIngredientInput"
-    />
-    <datalist id="drinkIngredient">
-      <option
-        *ngFor="let ingredient of ingredientList"
-        [value]="ingredient"
-      ></option>
-    </datalist>
-  </div>
-  <div class="col-auto">
-    <button type="submit" class="btn btn-primary">Search</button>
-  </div>
-</form>
+<div class="container">
+  <form
+    *ngIf="activeTab === 'search'"
+    class="row row-cols-md-auto g-3 align-items-center justify-content-center mt-3"
+    (submit)="onSubmit($event)"
+  >
+    <div class="col">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Drink Name"
+        (input)="nameOnChange($event)"
+        [disabled]="disableNameInput"
+      />
+    </div>
+    <div class="col">
+      <input
+        class="form-control"
+        list="drinkIngredient"
+        placeholder="Drink Ingredient"
+        (input)="ingredientOnChange($event)"
+        [disabled]="disableIngredientInput"
+      />
+      <datalist id="drinkIngredient">
+        <option
+          *ngFor="let ingredient of api.ingredientList"
+          [value]="ingredient"
+        ></option>
+      </datalist>
+    </div>
+    <div class="col">
+      <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+</div>
 <div
   *ngIf="disableCocktailView === false"
   class="d-flex flex-wrap justify-content-around mt-4"
@@ -72,6 +75,17 @@
           >Info</a
         >
       </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="activeTab === 'ingredients'" class="container text-center">
+  <div class="row row-cols-2 row-cols-md-3">
+    <div *ngFor="let ingredient of api.ingredientList" class="col">
+      <img
+        src="https://www.thecocktaildb.com/images/ingredients/{{
+          ingredient
+        }}-Medium.png"
+      />
     </div>
   </div>
 </div>
