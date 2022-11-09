@@ -30,7 +30,7 @@ type CocktailDetailApi = {
       strInstructionsDE: string;
       strInstructionsES: string;
       strInstructionsFR: string;
-      strInstructionsIT: string;  
+      strInstructionsIT: string;
       strDrinkThumb: string;
       strIngredient1: string;
       strIngredient2: string;
@@ -72,7 +72,7 @@ type CocktailDetail = {
   name: string;
   category: string;
   alcoholic: string;
-  instructions?: {[key: string]: string};
+  instructions?: { [key: string]: string };
   image: string;
   ingredients: string[];
   measures: string[];
@@ -89,9 +89,6 @@ export class APIService {
 
   cocktailDetailApi: CocktailDetailApi | undefined;
   cocktailDetail: CocktailDetail | undefined;
-
-  randomCocktailApi: CocktailDetailApi | undefined;
-  randomCocktail: CocktailDetail | undefined;
 
   searchByLetter(letter: string) {
     this.http
@@ -168,7 +165,7 @@ export class APIService {
           }
         }
 
-        const instructions: {[key: string]: string} = {};
+        const instructions: { [key: string]: string } = {};
         const languages = ['', 'DE', 'ES', 'FR', 'IT'];
         for (const language of languages) {
           const instruction =
@@ -179,9 +176,6 @@ export class APIService {
             instructions[language] = instruction;
           }
         }
-
-        console.log(instructions['DE']);
-        
 
         this.cocktailDetail = {
           id: this.cocktailDetailApi.drinks[0].idDrink,
@@ -200,12 +194,12 @@ export class APIService {
     this.http
       .get(`https://www.thecocktaildb.com/api/json/v1/1/random.php`)
       .subscribe((response) => {
-        this.randomCocktailApi = response as CocktailDetailApi;
+        this.cocktailDetailApi = response as CocktailDetailApi;
 
         const ingredients: string[] = [];
         for (let i = 1; i <= 15; i++) {
           const ingredient =
-            this.randomCocktailApi.drinks[0][
+            this.cocktailDetailApi.drinks[0][
               `strIngredient${i}` as keyof CocktailDetailApi['drinks'][0]
             ];
           if (ingredient) {
@@ -216,7 +210,7 @@ export class APIService {
         const measures: string[] = [];
         for (let i = 1; i <= 15; i++) {
           const measure =
-            this.randomCocktailApi.drinks[0][
+            this.cocktailDetailApi.drinks[0][
               `strMeasure${i}` as keyof CocktailDetailApi['drinks'][0]
             ];
           if (measure) {
@@ -224,28 +218,31 @@ export class APIService {
           }
         }
 
-        const instructions: {[key: string]: string} = {};
-        const languages = ['', 'DE', 'ES', 'FR', 'IT'];
-        for (const language of languages) {
+        const instructions: { [key: string]: string } = {};
+        const languages = ['EN', 'DE', 'ES', 'FR', 'IT'];
+        for (let language of languages) {
           const instruction =
-            this.randomCocktailApi.drinks[0][
-              `strInstructions${language}` as keyof CocktailDetailApi['drinks'][0]
+            this.cocktailDetailApi.drinks[0][
+              `strInstructions${language === 'EN' ? '' : language}` as keyof CocktailDetailApi['drinks'][0]
             ];
           if (instruction) {
             instructions[language] = instruction;
+          } else {
+            instructions[language] = 'No instructions available';
           }
-        }        
+        }
 
-        this.randomCocktail = {
-          id: this.randomCocktailApi.drinks[0].idDrink,
-          name: this.randomCocktailApi.drinks[0].strDrink,
-          category: this.randomCocktailApi.drinks[0].strCategory,
-          alcoholic: this.randomCocktailApi.drinks[0].strAlcoholic,
+        this.cocktailDetail = {
+          id: this.cocktailDetailApi.drinks[0].idDrink,
+          name: this.cocktailDetailApi.drinks[0].strDrink,
+          category: this.cocktailDetailApi.drinks[0].strCategory,
+          alcoholic: this.cocktailDetailApi.drinks[0].strAlcoholic,
           instructions: instructions,
-          image: this.randomCocktailApi.drinks[0].strDrinkThumb,
+          image: this.cocktailDetailApi.drinks[0].strDrinkThumb,
           ingredients: ingredients,
           measures: measures,
         };
+        
       });
   }
 
@@ -352,8 +349,8 @@ export class APIService {
   ];
 
   getIngredientImg(ingredient: string) {
-    return this.http
-    .get(`https://www.thecocktaildb.com/images/ingredients/${ingredient}-Medium.png`)
+    return this.http.get(
+      `https://www.thecocktaildb.com/images/ingredients/${ingredient}-Medium.png`
+    );
   }
-
 }

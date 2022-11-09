@@ -9,60 +9,7 @@
   </div>
 </nav>
 <h1>Random Cocktail</h1>
-<div class="card detailCard">
-  <div class="row g-0">
-    <div class="col-md-4">
-      <img
-        [src]="api.randomCocktail?.image"
-        class="img-fluid rounded"
-        alt="drink image"
-      />
-    </div>
-    <div class="col-md-8">
-      <div class="card-body">
-        <h2 class="card-title">{{ api.randomCocktail?.name }}</h2>
-        <p class="card-text">
-          <small class="text-muted fst-italic">{{
-            api.randomCocktail?.id
-          }}</small>
-        </p>
-        <p class="card-text">
-          <span class="badge text-bg-primary fst-italic">{{
-            api.randomCocktail?.alcoholic
-          }}</span>
-          - {{ api.randomCocktail?.category }}
-        </p>
-        <p>
-          <select class="form-select" [(ngModel)]="selectLanguage">
-            <option value="" selected>English</option>
-            <option value="DE">German</option>
-            <option value="ES">Spanish</option>
-            <option value="FR">French</option>
-            <option value="IT">Italian</option>
-          </select>
-        </p>
-        <p class="card-text">
-          {{
-            api.randomCocktail?.instructions![selectLanguage] ||
-              "No instructions found in this language"
-          }}
-        </p>
-        <p>
-          <span class="fw-bold fst-italic">Ingredients:</span>
-          <li *ngFor="let ingredient of api.randomCocktail?.ingredients">
-            {{ ingredient }}
-          </li>
-        </p>
-        <p>
-          <span class="fw-bold fst-italic">Measures:</span>
-          <li *ngFor="let measure of api.randomCocktail?.measures">
-            {{ measure }}
-          </li>
-        </p>
-      </div>
-    </div>
-  </div>
-</div>
+<app-detail></app-detail>
 <h1>Cocktail List</h1>
 <ul class="nav nav-tabs justify-content-center nav-justified">
   <li
@@ -76,19 +23,4 @@
   </li>
 </ul>
 <div class="text-muted">{{api.cocktailList?.length}} results found</div>
-<div class="d-flex flex-wrap justify-content-around">
-  <div
-    *ngFor="let cocktail of api.cocktailList"
-    class="card"
-    style="width: 18rem"
-  >
-    <img [src]="cocktail.image" class="card-img-top" alt="cocktail image" />
-    <div class="card-body">
-      <h5 class="card-title">{{ cocktail.name }}</h5>
-      <h6 class="text-muted fst-italic">{{ cocktail.category }}</h6>
-      <div class="text-end">
-        <a class="btn btn-primary" [routerLink]="'/detail/' + cocktail.id">Info</a>
-      </div>
-    </div>
-  </div>
-</div>
+<app-card-list list="cocktailList" type="samePage"></app-card-list>

@@ -23,7 +23,7 @@
         </p>
         <p>
           <select class="form-select" [(ngModel)]="selectLanguage">
-            <option value="" selected>English</option>
+            <option value="EN" selected>English</option>
             <option value="DE">German</option>
             <option value="ES">Spanish</option>
             <option value="FR">French</option>
@@ -32,8 +32,9 @@
         </p>
         <p class="card-text">
           {{
-            (api.cocktailDetail?.instructions)![selectLanguage] ||
-              "No instructions found in this language"
+            api.cocktailDetail
+              ? api.cocktailDetail.instructions![selectLanguage]
+              : ""
           }}
         </p>
         <p>
@@ -51,26 +52,6 @@
             {{ measure }}
           </li>
         </p>
-      </div>
-    </div>
-  </div>
-</div>
-<div *ngIf="disableCocktailView === false">
-  <h1 id="cocktailView">Cocktails with {{ searchedIngredient }}</h1>
-  <div class="text-muted">{{ api.cocktailList?.length }} results found</div>
-  <div class="d-flex flex-wrap justify-content-around">
-    <div
-      *ngFor="let cocktail of api.cocktailList"
-      class="card m-2"
-      style="width: 18rem"
-    >
-      <img [src]="cocktail.image" class="card-img-top" alt="cocktail image" />
-      <div class="card-body">
-        <h5 class="card-title">{{ cocktail.name }}</h5>
-        <h6 class="text-muted fst-italic">{{ cocktail.id }}</h6>
-        <div class="text-end">
-          <a class="btn btn-primary" (click)="infoOnClick(cocktail.id)">Info</a>
-        </div>
       </div>
     </div>
   </div>

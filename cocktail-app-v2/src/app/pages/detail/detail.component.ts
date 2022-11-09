@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { APIService } from 'src/app/api';
 
 @Component({
@@ -8,25 +8,16 @@ import { APIService } from 'src/app/api';
   styleUrls: ['./detail.component.css'],
 })
 export class DetailComponent implements OnInit {
-  constructor(public api: APIService, private route: ActivatedRoute) {}
+  constructor(public api: APIService, private router: Router, private route: ActivatedRoute) {}
   
   ngOnInit(): void {
-    this.api.searchById(this.route.snapshot.params['idDrink']);
   }
   
-  disableCocktailView: boolean = true;
-  searchedIngredient: string = '';
-  selectLanguage: string = '';
+  selectLanguage: string = 'EN';
 
   ingredientOnClick(e: any) {
     this.api.searchByIngredient(e.target.innerText);
-    this.searchedIngredient = e.target.innerText;
-    this.disableCocktailView = false;
-  }
-
-  infoOnClick(idDrink: string) {
-    this.api.searchById(idDrink);    
-    this.disableCocktailView = true;
+    this.router.navigateByUrl('/list?ingredient=' + e.target.innerText);
   }
 
 }

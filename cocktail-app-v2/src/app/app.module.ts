@@ -9,6 +9,7 @@ import { DetailComponent } from './pages/detail/detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { OrderComponent } from './pages/order/order.component';
+import { CardListComponent } from './pages/card-list/card-list.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { OrderComponent } from './pages/order/order.component';
     SearchComponent,
     DetailComponent,
     OrderComponent,
+    CardListComponent,
   ],
   imports: [
     BrowserModule,

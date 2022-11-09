@@ -1,0 +1,48 @@
+<div *ngIf="list === 'cocktailList'">
+  <div *ngIf="type === 'newPage'">
+    <h1>Cocktail with {{searchedIngredient}}</h1>
+  </div>
+  <div class="d-flex flex-wrap justify-content-around">
+    <div
+      *ngFor="let cocktail of api.cocktailList"
+      class="card"
+      style="width: 18rem"
+    >
+      <img [src]="cocktail.image" class="card-img-top" alt="cocktail image" />
+      <div class="card-body">
+        <h5 class="card-title">{{ cocktail.name }}</h5>
+        <h6 class="text-muted fst-italic">
+          {{ cocktail.category || cocktail.id }}
+        </h6>
+        <div class="text-end">
+          <a class="btn btn-primary" [routerLink]="'/detail/' + cocktail.id"
+            >Info</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  *ngIf="list === 'ingredientList'"
+  class="d-flex flex-wrap justify-content-around"
+>
+  <div
+    *ngFor="let ingredient of api.ingredientList"
+    class="card"
+    style="width: 18rem"
+    (click)="ingredientOnClick(ingredient)"
+  >
+    <img
+      src="https://www.thecocktaildb.com/images/ingredients/{{
+        ingredient
+      }}-Medium.png"
+      class="card-img-top"
+      alt="cocktail image"
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ ingredient }}</h5>
+    </div>
+  </div>
+</div>
