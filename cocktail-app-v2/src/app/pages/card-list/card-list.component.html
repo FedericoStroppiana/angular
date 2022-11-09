@@ -1,6 +1,21 @@
 <div *ngIf="list === 'cocktailList'">
   <div *ngIf="type === 'newPage'">
-    <h1>Cocktail with {{searchedIngredient}}</h1>
+    <nav class="navbar navbar-dark bg-primary p-4">
+      <div class="container-fluid">
+        <a class="navbar-brand"
+          ><i class="bi bi-cup-straw"></i> Cocktail Application</a
+        >
+        <div>
+          <button class="btn btn-outline-light me-3" routerLink="/search">
+            Search <i class="bi bi-search"></i>
+          </button>
+          <button class="btn btn-outline-light" routerLink="/home">
+            Home <i class="bi bi-house-fill"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+    <h1>Cocktail with {{ searchedIngredient }}</h1>
   </div>
   <div class="d-flex flex-wrap justify-content-around">
     <div
