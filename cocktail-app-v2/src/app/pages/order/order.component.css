@@ -1,6 +1,59 @@
 .detailCard {
   border: 0;
 }
-/* .form-check-input {
-    display: none;
-} */
+
+input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  margin: 10px;
+  cursor: pointer;
+  user-select: none;
+}
+
+label::before {
+  background-color: green;
+  color: white;
+  content: "✓";
+  display: block;
+  border-radius: 50%;
+  border: 1px solid green;
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+  line-height: 24px;
+  transition-duration: 0.4s;
+  transform: scale(0);
+  z-index: 2;
+}
+
+label img {
+  transition-duration: 0.2s;
+  transform-origin: 50% 50%;
+}
+
+:checked + label::before {
+  content: "✓";
+  background-color: green;
+  transform: scale(1);
+}
+
+:checked + label img {
+  transform: scale(0.9);
+  box-shadow: 0 0 10px green;
+  z-index: 1;
+}
+
+.container {
+  position: relative;
+}
+
+.container .cart {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

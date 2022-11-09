@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: "detail/:idDrink", component: DetailComponent },
   { path: "list", component: CardListComponent },
   { path: "order", component: OrderComponent }, 
-  { path: "", redirectTo: "search", pathMatch: "full" },
-  { path: "**", redirectTo: "search" },
+  { path: "", redirectTo: "order", pathMatch: "full" },
+  { path: "**", redirectTo: "order" },
 ]; 
 
 @NgModule({
