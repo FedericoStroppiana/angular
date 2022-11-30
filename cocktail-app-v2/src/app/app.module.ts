@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { OrderComponent } from './pages/order/order.component';
 import { CardListComponent } from './pages/card-list/card-list.component';
+import { BlockUIModule } from 'ng-block-ui';
+import { BlockUIHttpModule } from 'ng-block-ui/http';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { CardListComponent } from './pages/card-list/card-list.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    BlockUIModule.forRoot(),
+    BlockUIHttpModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

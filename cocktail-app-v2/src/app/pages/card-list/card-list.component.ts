@@ -21,6 +21,9 @@ export class CardListComponent implements OnInit {
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
       this.searchedIngredient = params['ingredient'];
+      if (this.searchedIngredient) {
+        this.api.searchByIngredient(this.searchedIngredient);
+      }
     });
   }
 

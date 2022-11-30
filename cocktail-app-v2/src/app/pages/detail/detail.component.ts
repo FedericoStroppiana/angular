@@ -8,16 +8,23 @@ import { APIService } from 'src/app/api';
   styleUrls: ['./detail.component.css'],
 })
 export class DetailComponent implements OnInit {
-  constructor(public api: APIService, private router: Router, private route: ActivatedRoute) {}
-  
+  constructor(
+    public api: APIService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
   ngOnInit(): void {
+    if (this.route.snapshot.params['idDrink'])
+      this.api.searchById(this.route.snapshot.params['idDrink']);
   }
-  
+
+  @Input() type?: string = 'newPage';
+
   selectLanguage: string = 'EN';
 
   ingredientOnClick(e: any) {
     this.api.searchByIngredient(e.target.innerText);
     this.router.navigateByUrl('/list?ingredient=' + e.target.innerText);
   }
-
 }
